@@ -18,6 +18,8 @@ const commonFeatureRouter = require("./routes/common/feature-routes");
 
 //create a database connection -> u can also
 //create a separate file for this and then import/use that file here
+const mongodburl = process.env.MONGODB_URL;
+console.log("MongoDB URL:", mongodburl); 
 mongoose
   .connect(process.env.MONGODB_URL, )
   .then(() => console.log("MongoDB connected"))
@@ -40,7 +42,9 @@ app.use(
     credentials: true,
   })
 );
-
+app.get("/", (req, res) => {
+  res.send("Welcome to the MERN E-commerce API");
+})
 app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRouter);
