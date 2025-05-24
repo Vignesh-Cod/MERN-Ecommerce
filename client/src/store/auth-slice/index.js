@@ -59,7 +59,7 @@ export const logoutUser = createAsyncThunk(
 export const checkAuth = createAsyncThunk(
   "/auth/checkauth",
 
-  async () => {
+  async (token) => {
     const response = await axios.get(
       `${import.meta.env.VITE_API_URL}/api/auth/check-auth`,
       {
@@ -83,8 +83,8 @@ const authSlice = createSlice({
     setUser: (state, action) => {},
     resetTokenAndCredentials: (state) => {
       state.isAuthenticated = false;
-            state.user = null;
-             state.token = null;
+      state.user = null;
+      state.token = null;
 
       }
   },
@@ -112,7 +112,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.user = action.payload.success ? action.payload.user : null;
         state.isAuthenticated = action.payload.success;
-        state.token = action.payload.success 
+        state.token = action.payload.token; 
         sessionStorage.setItem("token", JSON.stringify(action.payload.token));
       })
       .addCase(loginUser.rejected, (state, action) => {

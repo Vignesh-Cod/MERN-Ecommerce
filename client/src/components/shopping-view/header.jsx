@@ -73,7 +73,7 @@ function HeaderRightContent() {
 
   function handleLogout() {
     //dispatch(logoutUser());
-    dispatchr(resetTokenAndCredentials());
+    dispatch(resetTokenAndCredentials());
     sessionStorage.clear();
     navigate("/auth/login");
   }
